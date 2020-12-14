@@ -1,1 +1,104 @@
-<mxfile host="app.diagrams.net" modified="2020-12-14T21:06:36.080Z" agent="5.0 (Macintosh)" etag="QBHahJgn353Dn8w0Kob_" version="14.0.1" type="github"><diagram id="p_Ik-KB9Dxw_5yPirhdf" name="Page-1">5Vpbc+I2FP41zLQPm7F8Ax4JJG1mty0zbNv0aUfYwlZiWx5Z5pJfv5It3yLDOtuAITwhHSRbOuf7fC7SwJiG298ojP0/iIuCga6524ExG+i6bhqA/wjJLpcAw5QSj2JXyirBAr8gKdSkNMUuShoDGSEBw3FT6JAoQg5ryCClZNMctiJB860x9JAiWDgwUKX/Ypf5UgrscfXH7wh7fvFq2zLzf0JYjJZbSXzokk1NZNwNjCklhOWtcDtFgVBfoZh83v2ef8uVURSxLhM+O59ny/XjP5s/R5uX7eP27/Dh6ZNuy8WxXbFl5HINyC6hzCceiWBwV0lvKUkjF4nHarxXjflCSMyFgAufEGM7aU6YMsJFPgsD+S9fMd09ivk3VtH9Tz4u68y2jd5O9vK1igXu1YEUJSSlDjq0cQkmSD3EDowzS0txkCMSIr4ePo+iADK8bq4DSrB55bjKHLwhLfIW6+TPXcMglW8a6HbAl3vr4jVveqL5lcQkIJ5YVUzJGieYRDjyipH8xbXBLfN/mcwH+lToDNE1onkbJgn2It54mIue61KUJBn5RFcQLsBc578Wz1vS1294/d5XKEsYJc8lp/QmPjhVYjEu3Hriu3KzCsjG8SFlNwk3GPsmxmx8zNAihpmVN3xY+Ra+CYa2hxGiWlROMG05RX6xbMneTcV+PiaX+TXij7RjYWB4pQw1OzLU6pOhpsLQhUCo2J9DccxU3Etoc6o6glLtQK5ZYgmdZy+z518pC3CEpPwdsG7pZgPrYKyCHRTuqw52+2hgH10p2K2OYB/2CXZLAftUhl2FPyg8xGLxMLso6Bta79AfXyn0hx2hD8Z9Yn+oYh/GLKUoD5aIg/kiSJQHYU4eLMHIFczwkfNcZ4jMVfAas915k0QbN0highaSWKckCQCKGe4JDWVMSlFM6IW5XNPs+8NjqNDu40v0jl8U0DW5A3uMdZpPSrHMmuInXGO7F/FNiR2OyotCsmH0jmT7wyHZ6IpkvVckG4riF4xr6xJhXNbr+oOxGmdfOoy75vI5kHqDcVs2n8GY+VmcF3iEYuaHZ41oc9yM2gBoC9uGJ0W0qthLR3TXhB30WkAGrSk7w1Eq8EzTKK8Uq/jWVoRmGYyACFfGWSPe0po1W6C1ZfN2S9X2eNm82QfA0RazWjLPe2Uuz9tVKi86RSZfVQAa+X9VDjh+BQDYXcnUa/kLqOHlxH1KE3YxrsEo4hhJlNGw91inF0fQzhPQkSdvq5RlvTmimCsM0SOQp2v9rHbo3Ad51CpDcVLi+DDycj/09VFogWzEMaSWVdMmc1FJQ2EqFpmNoQSGWeuMiWbazRhs2FLl0Y2TEg0oCruO8jIYXYZzGe3lhyhtRmhzidm03X9NSFMUdiW4H3fF/ahX3I8V3LfcUWlUkzrea5EHA9WxC4zhEgfZoUt5VPCzt1fOiHPmqMk5q6WApWun5Fyxh4+T7hcq/TGZ7D7JpKvpfkRaVf8FLlHQVBcMxI0vY+Zw7YhA9VagEjswmMg/Quy6uWVQgl/gMnuesE1McMSyvVi3A2t2CNby7FNOHpTF1rpRDmBqLwk+aTc6GI4aRCjuK3TWvXz6XGynNoSsVgliinHKRfwP56TWza+GKL1e2zLUaGuHko/BFGNPDb3GFLs4Yihuv5w7UYrN1+w14xNqyaDGPXKMuPLvVWf9c1dNXeRkd2n3OPd38NyW0fTcI6slWm7z3KXwDcTg3equeW6X6s6+cfcd</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2020-12-14T21:09:06.682Z" agent="5.0 (Macintosh)" etag="y-eigHeLnRH8wO9mqv81" version="14.0.1" type="github">
+  <diagram id="p_Ik-KB9Dxw_5yPirhdf" name="Page-1">
+    <mxGraphModel dx="2066" dy="1140" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-2" target="KcKDbvXVwN8wzxXxUmIj-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-2" value="&lt;div&gt;Topology provisioning&lt;/div&gt;&lt;div&gt;(AP, server, assign IP address to a client)&lt;br&gt;&lt;/div&gt;" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="461" y="60" width="246" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-4" target="KcKDbvXVwN8wzxXxUmIj-5" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-4" value="Start script" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="524" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-5" target="KcKDbvXVwN8wzxXxUmIj-7" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-5" value="Connect client to SSID" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="524" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-7" target="KcKDbvXVwN8wzxXxUmIj-19" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-7" value="Capture association process and check client connectivity" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="509" y="410" width="150" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-11" value="Form a report" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="524" y="1440" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-37" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-12" target="KcKDbvXVwN8wzxXxUmIj-11" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-12" value="Analyze pcap" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;strokeWidth=5;" parent="1" vertex="1">
+          <mxGeometry x="524" y="1330" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-13" target="KcKDbvXVwN8wzxXxUmIj-12" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-13" value="Stop pcap" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="524" y="1220" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-35" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-14" target="KcKDbvXVwN8wzxXxUmIj-13" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-14" value="Stop the algorithm" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="499" y="1110" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-34" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-15" target="KcKDbvXVwN8wzxXxUmIj-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-15" value="Continue running the algorithm for an hour" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="501" y="1000" width="166" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-16" target="KcKDbvXVwN8wzxXxUmIj-17" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-16" value="Adjust algorithm" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="320" y="870" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-17" target="KcKDbvXVwN8wzxXxUmIj-20" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-17" value="Start changing TX power on APs emulating roaming" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="469" y="740" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-18" target="KcKDbvXVwN8wzxXxUmIj-17" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-18" value="Start a new pcap" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="524" y="630" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-19" target="KcKDbvXVwN8wzxXxUmIj-18" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-19" value="&lt;div&gt;Stop pcap&lt;/div&gt;&lt;div&gt;Form client capability report&lt;br&gt;&lt;/div&gt;" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
+          <mxGeometry x="484" y="520" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-20" target="KcKDbvXVwN8wzxXxUmIj-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-25" value="no" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="KcKDbvXVwN8wzxXxUmIj-21" vertex="1" connectable="0">
+          <mxGeometry x="-0.2178" y="-5" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-33" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="KcKDbvXVwN8wzxXxUmIj-20" target="KcKDbvXVwN8wzxXxUmIj-15" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-38" value="yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="KcKDbvXVwN8wzxXxUmIj-33" vertex="1" connectable="0">
+          <mxGeometry x="-0.2635" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KcKDbvXVwN8wzxXxUmIj-20" value="Did roaming happen?" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.decision;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="534" y="850" width="100" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
