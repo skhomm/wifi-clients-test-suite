@@ -2,7 +2,11 @@
 # Firmware: 8.6.0.4
 
 import time
+import getpass
 from netmiko import ConnectHandler
+
+username = input("Username: ")
+password = getpass.getpass()
 
 # Define variables
 replay = 2
@@ -17,17 +21,17 @@ channel = {1: 149, 2: 157}
 aruba_1 = {
     'device_type': 'aruba_os',
     'host':   '10.0.0.1',
-    'username': 'LOGIN',
-    'password': 'PASSWORD',
+    'username': username,
+    'password': password,
 }
 aruba_2 = {
     'device_type': 'aruba_os',
     'host':   '10.0.0.2',
-    'username': 'LOGIN',
-    'password': 'PASSWORD',
+    'username': username,
+    'password': password,
 }
 
-print("It's roaming time!")
+print("\nIt's roaming time!")
 
 for n in range(replay):
     print("\nRound",n+1)
