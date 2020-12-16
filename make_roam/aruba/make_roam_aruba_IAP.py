@@ -27,22 +27,22 @@ aruba_2 = {
     'password': 'PASSWORD',
 }
 
-print ("It's roaming time!")
+print("It's roaming time!")
 
 for n in range(replay):
-    print ("\nRound",n+1)
+    print("\nRound",n+1)
     
     # One full round starts here
     ap_counter=1
     for device in (aruba_1, aruba_2):
-        print ("\n================================================================")
-        print ("Connecting to AP",ap_counter,"...")
+        print("\n================================================================")
+        print("Connecting to AP",ap_counter,"...")
         net_connect = ConnectHandler(**device)
-        print ("Successful!")
+        print("Successful!")
         
         # Change power - step by step 
         for tx_power in range (max_power, min_power, step_power):
-            print ("\nTX power ->",tx_power,"dBm")
+            print("\nTX power ->",tx_power,"dBm")
 
             # Send command to change power
             change_power = "a-channel " + str(channel[ap_counter]) + " " + str(tx_power)
@@ -52,16 +52,16 @@ for n in range(replay):
             output = net_connect.send_command(show_comand)
             listed_output=output.split("\n")
             for i in range (3):
-                print (listed_output[i])
+                print(listed_output[i])
             time.sleep(1)
 
         # Give some time to roam and revert power back to the max value
-        print ("\nReverting back to",max_power,"dBm in...")
+        print("\nReverting back to",max_power,"dBm in...")
         for i in range (countdown, 0, -1):
-            print (i)
+            print(i)
             time.sleep(1)
-        print ("Now!")
-        print ("\nTX power ->",max_power,"dBm")
+        print("Now!")
+        print("\nTX power ->",max_power,"dBm")
 
         # Send command to change power
         change_power = "a-channel " + str(channel[ap_counter]) + " " + str(max_power)
@@ -71,10 +71,10 @@ for n in range(replay):
         output = net_connect.send_command(show_comand)
         listed_output=output.split("\n")
         for i in range (3):
-            print (listed_output[i])
+            print(listed_output[i])
 
         # Setting counter for the next AP
         ap_counter+=1
     # One full round finishes here
 
-print ("\nHope it was seamless...") #mheh
+print("\nHope it was seamless...") #mheh
