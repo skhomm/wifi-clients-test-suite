@@ -30,35 +30,17 @@ def run_device(current_ap):
     net_connect = ConnectHandler(**device)
     print("Successful!")
 
-    # Change power - step by step
-    for tx_power in range(max_power, min_power, step_power):
-        print("\nTX power ->", tx_power, "dBm")
-
-        # Send command to change power
-        change_power = "a-channel " + str(channel[ap_counter]) + " " + str(tx_power)
-        net_connect.send_command(change_power)
-
         # Send command to show current values and wait a second
-        output = net_connect.send_command(show_comand)
-        print(*output.split('\n')[0:3], sep='\n')
-        time.sleep(1)
-
-    # Give some time to roam and revert power back to the max value
-    print("\nReverting back to", max_power, "dBm in...")
-    for i in range(countdown, 0, -1):
-        print(i)
-        time.sleep(1)
-    print("Now!")
-    print("\nTX power ->", max_power, "dBm")
-
-    # Send command to change power
-    change_power = "a-channel " + str(channel[ap_counter]) + " " + str(max_power)
-    net_connect.send_command(change_power)
-
-    # Send command to show current values
+    
     output = net_connect.send_command(show_comand)
+    # for line in output.split("\n"): print(line)
+    # print(output)
+    # listed_output = output.split("\n")
     print(*output.split('\n')[0:3], sep='\n')
-
+    # print(*listed_output[0:3], sep='\n')
+    # for i in range(10):
+    #     print(listed_output[i])
+    # time.sleep(1)
 
 # It all starts here
 print("\nIt's roaming time!")
