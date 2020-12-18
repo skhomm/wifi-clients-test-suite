@@ -1,7 +1,5 @@
-# Devices: Aruba IAP
-# Firmware: 8.6.0.4
-
 import time
+import json
 import getpass
 
 from netmiko import ConnectHandler
@@ -18,19 +16,8 @@ countdown = 10
 show_comand = "show ap debug driver-config | inc EIRP|Channel|BSSID"
 channel = {1: 149, 2: 157}
 
-# Define devices and login credentials
-aruba_1 = {
-    'device_type': 'aruba_os',
-    'host':   '10.0.0.1',
-    'username': username,
-    'password': password,
-}
-aruba_2 = {
-    'device_type': 'aruba_os',
-    'host':   '10.0.0.2',
-    'username': username,
-    'password': password,
-}
+with open('devices.json') as devices_file:
+    devices = json.load(devices_file)
 
 print("\nIt's roaming time!")
 
@@ -39,7 +26,10 @@ for n in range(replay):
 
     # One full round starts here
     ap_counter = 1
-    for device in (aruba_1, aruba_2):
+    for device in devices:
+        device['username'] = username
+        device['password'] = password
+
         print("\n" + "====" * 12)
         print("Connecting to AP", ap_counter, "...")
         net_connect = ConnectHandler(**device)
