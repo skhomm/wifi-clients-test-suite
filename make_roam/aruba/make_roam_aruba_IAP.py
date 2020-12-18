@@ -3,6 +3,7 @@
 
 import time
 import getpass
+
 from netmiko import ConnectHandler
 
 username = input("Username: ")
@@ -39,7 +40,7 @@ for n in range(replay):
     # One full round starts here
     ap_counter = 1
     for device in (aruba_1, aruba_2):
-        print("\n================================================================")
+        print("\n" + "====" * 12)
         print("Connecting to AP", ap_counter, "...")
         net_connect = ConnectHandler(**device)
         print("Successful!")
