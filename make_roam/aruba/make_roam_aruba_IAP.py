@@ -70,24 +70,25 @@ def run_device(current_ap):
 
 
 # It all starts here
-username = input("Username: ")
-password = getpass.getpass()
+if __name__ == '__main__':
+    username = input("Username: ")
+    password = getpass.getpass()
 
-# Get devices dictionary from file
-with open('devices.json') as devices_file:
-    devices = json.load(devices_file)
+    # Get devices dictionary from file
+    with open('devices.json') as devices_file:
+        devices = json.load(devices_file)
 
-print("\nIt's roaming time!")
+    print("\nIt's roaming time!")
 
-# Replay as many times as REPLAY parameter dictates
-for n in range(REPLAY):
-    print("\nRound", n+1)
-    ap_counter = 1
+    # Replay as many times as REPLAY parameter dictates
+    for n in range(REPLAY):
+        print("\nRound", n+1)
+        ap_counter = 1
 
-    # Full round for each device
-    for device in devices:
-        run_device(device)
-        # Setting counter for the next AP
-        ap_counter += 1
+        # Full round for each device
+        for device in devices:
+            run_device(device)
+            # Setting counter for the next AP
+            ap_counter += 1
 
-print("\nHope it was seamless...")  # mheh
+    print("\nHope it was seamless...")  # mheh
