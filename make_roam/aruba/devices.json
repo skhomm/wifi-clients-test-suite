@@ -1,0 +1,10 @@
+[
+    {
+        "device_type": "aruba_os",
+        "host": "10.77.30.30"
+    },
+    {
+        "device_type": "aruba_os",
+        "host": "10.77.30.33"
+    }
+]
