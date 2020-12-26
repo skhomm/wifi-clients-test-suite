@@ -15,10 +15,9 @@ from netmiko import ConnectHandler
 REPLAY = 2
 MIN_POWER = 2
 MAX_POWER = 21
-STEP_POWER = -3
-COUNTDOWN = 10
+STEP_POWER = -6
+COUNTDOWN = 5
 SHOW_ARGS = "EIRP|Channel|BSSID"
-CHANNEL = {1: 149, 2: 154}
 
 
 def show_cmd(include_args):
@@ -33,6 +32,7 @@ def change_pwr_cmd(current_channel, current_tx_power):
 def run_device(device, ap_counter, username, password):
     device['username'] = username
     device['password'] = password
+    channel = device.pop('channel')
 
     print("\n" + "====" * 12)
     print("Connecting to AP", ap_counter, "...")
@@ -44,7 +44,7 @@ def run_device(device, ap_counter, username, password):
         print("\nTX power ->", tx_power, "dBm")
 
         # Send command to change power
-        change_power = change_pwr_cmd(str(CHANNEL[ap_counter]), str(tx_power))
+        change_power = change_pwr_cmd(str(channel), str(tx_power))
         net_connect.send_command(change_power)
 
         # Send command to show current values and wait a second
@@ -61,7 +61,7 @@ def run_device(device, ap_counter, username, password):
     print("\nTX power ->", MAX_POWER, "dBm")
 
     # Send command to change power
-    change_power = change_pwr_cmd(str(CHANNEL[ap_counter]), str(MAX_POWER))
+    change_power = change_pwr_cmd(str(channel), str(MAX_POWER))
     net_connect.send_command(change_power)
 
     # Send command to show current values
@@ -69,21 +69,18 @@ def run_device(device, ap_counter, username, password):
     print(*output.split('\n')[0:3], sep='\n')
 
 
-print("\nDebug hi from inner module")
-
-
 def main():
     username = input("Username: ")
     password = getpass.getpass()
-
-    # Get devices dictionary from file
-    with open('devices.json') as devices_file:
-        devices = json.load(devices_file)
 
     print("\nIt's roaming time!")
 
     # Replay as many times as REPLAY parameter dictates
     for n in range(REPLAY):
+        # Get devices dictionary from file
+        with open('devices.json') as devices_file:
+            devices = json.load(devices_file)
+
         print("\nRound", n+1)
         ap_counter = 1
 

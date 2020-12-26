@@ -1,10 +1,12 @@
 [
     {
         "device_type": "aruba_os",
-        "host": "10.77.30.30"
+        "host": "10.77.30.30",
+        "channel": "149"
     },
     {
         "device_type": "aruba_os",
-        "host": "10.77.30.33"
+        "host": "10.77.30.33",
+        "channel": "153"
     }
 ]
