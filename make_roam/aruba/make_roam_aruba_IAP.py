@@ -30,10 +30,7 @@ def change_pwr_cmd(current_channel, current_tx_power):
 
 
 # Function runs full round at one device
-def run_device(current_ap):
-    current_ap['username'] = username
-    current_ap['password'] = password
-
+def run_device(device, ap_counter, username, password):
     print("\n" + "====" * 12)
     print("Connecting to AP", ap_counter, "...")
     net_connect = ConnectHandler(**device)
@@ -69,8 +66,10 @@ def run_device(current_ap):
     print(*output.split('\n')[0:3], sep='\n')
 
 
-# It all starts here
-if __name__ == '__main__':
+print("\nDebug hi from inner module")
+
+
+def main():
     username = input("Username: ")
     password = getpass.getpass()
 
@@ -87,8 +86,13 @@ if __name__ == '__main__':
 
         # Full round for each device
         for device in devices:
-            run_device(device)
+            run_device(device, ap_counter, username, password)
             # Setting counter for the next AP
             ap_counter += 1
 
     print("\nHope it was seamless...")  # mheh
+
+
+# It all starts here
+if __name__ == '__main__':
+    main()
