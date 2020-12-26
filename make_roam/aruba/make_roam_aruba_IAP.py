@@ -31,6 +31,9 @@ def change_pwr_cmd(current_channel, current_tx_power):
 
 # Function runs full round at one device
 def run_device(device, ap_counter, username, password):
+    device['username'] = username
+    device['password'] = password
+
     print("\n" + "====" * 12)
     print("Connecting to AP", ap_counter, "...")
     net_connect = ConnectHandler(**device)
