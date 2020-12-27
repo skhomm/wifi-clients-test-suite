@@ -17,7 +17,7 @@ Please choose a vendor
 vendor_chosen = input("Type number and press Enter\n")
 
 if vendor_chosen == "1":
-    print("\nStarting suite for Aruba...")
+    print("\nStarting suite for Aruba...\n")
     make_roam_aruba_IAP.main()
 elif vendor_chosen == "2":
     print("\nCisco is not yet supported")
