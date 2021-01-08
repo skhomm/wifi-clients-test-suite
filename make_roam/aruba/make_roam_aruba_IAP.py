@@ -5,14 +5,17 @@ It's achieved by controlling power settings of APs.
 Client doesn't need to move. It roams from AP with low power.
 """
 
+import sys
 import time
 import getpass
 
 from netmiko import ConnectHandler
+from netmiko.ssh_exception import NetMikoTimeoutException
+from paramiko.ssh_exception import AuthenticationException
 
 try:
     import config
-    print("Starting make_roam module...\n")
+    print("Starting make_roam module separately...\n")
 except ImportError:
     from . import config
 
@@ -21,8 +24,8 @@ def show_cmd(include_args):
     return(f"show ap debug driver-config | inc {include_args}")
 
 
-def change_pwr_cmd(current_channel, current_tx_power):
-    return(f"a-channel {current_channel} {current_tx_power}")
+def change_pwr_cmd(current_channel, current_power):
+    return(f"a-channel {current_channel} {current_power}")
 
 
 # Function runs full round at one device
@@ -39,15 +42,21 @@ def run_device(device, username, password):
 
     print("\n" + "====" * 12)
     print(f"Connecting to {ap_name} [{host}] ...")
-    net_connect = ConnectHandler(**netmiko_device)
-    print("Successful!")
+
+    try:
+        net_connect = ConnectHandler(**netmiko_device)
+        print("Successful!")
+    except AuthenticationException:
+        sys.exit("Authentication failed!")
+    except NetMikoTimeoutException:
+        sys.exit("TCP connection to the device failed!")
 
     # Change power - step by step
-    for tx_power in range(config.MAX_POWER, config.MIN_POWER, config.STEP_POWER):
-        print(f"\nTX power -> {tx_power} dBm")
+    for power in range(config.MAX_POWER, config.MIN_POWER, config.STEP_POWER):
+        print(f"\nTX power -> {power} dBm")
 
         # Send command to change power
-        change_power = change_pwr_cmd(str(channel), str(tx_power))
+        change_power = change_pwr_cmd(str(channel), str(power))
         net_connect.send_command(change_power)
 
         # Send command to show current values and wait a second
