@@ -6,20 +6,15 @@ Client doesn't need to move. It roams from AP with low power.
 """
 
 import time
-import json
 import getpass
-import os
 
 from netmiko import ConnectHandler
 
-# Dirty hacks to make peace with import from subfolders nightmare
 try:
     import config
+    print("Starting make_roam module...\n")
 except ImportError:
     from . import config
-
-THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-DEVICES_JSON = os.path.join(THIS_FOLDER, 'devices.json')
 
 
 def show_cmd(include_args):
@@ -81,10 +76,6 @@ def main():
     username = input("Username: ")
     password = getpass.getpass()
 
-    # Get devices dictionary from file
-    with open(DEVICES_JSON) as devices_file:
-        devices = json.load(devices_file)
-
     print("\nIt's roaming time!")
 
     # Replay as many times as REPLAY parameter dictates
@@ -93,7 +84,7 @@ def main():
         print("\nRound", n+1)
 
         # Full round for each device
-        for device in devices:
+        for device in config.DEVICES:
             run_device(device, username, password)
 
     print("\nHope it was seamless...")  # mheh
