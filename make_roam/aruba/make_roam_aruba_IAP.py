@@ -13,11 +13,7 @@ from netmiko import ConnectHandler
 from netmiko.ssh_exception import NetMikoTimeoutException
 from paramiko.ssh_exception import AuthenticationException
 
-try:
-    import config
-    print("Starting make_roam module separately...\n")
-except ImportError:
-    from . import config
+from make_roam.aruba import config
 
 
 def show_cmd(include_args):
