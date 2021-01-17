@@ -20,6 +20,10 @@ def show_cmd(include_args):
     return(f"show ap debug driver-config | inc {include_args}")
 
 
+def show_assoc():
+    return("show ap association")
+
+
 def change_pwr_cmd(current_channel, current_power):
     return(f"a-channel {current_channel} {current_power}")
 
@@ -31,7 +35,7 @@ def run_device(device, username, password):
     netmiko_device['username'] = username
     netmiko_device['password'] = password
 
-    # Netmiko doesn't accept 'channel' in it's dictionary
+    # Netmiko doesn't accept 'channel' or 'ap_name' in it's dictionary
     channel = netmiko_device.pop('channel')
     ap_name = netmiko_device.pop('ap_name')
     host = netmiko_device['host']
@@ -46,6 +50,16 @@ def run_device(device, username, password):
         sys.exit("Authentication failed!")
     except NetMikoTimeoutException:
         sys.exit("TCP connection to the device failed!")
+
+    print("\nCollecting information ...\n")
+
+    output = net_connect.send_command(show_cmd(config.SHOW_ARGS))
+    print(*output.split('\n')[0:3], sep='\n')
+
+    output = net_connect.send_command(show_assoc())
+    print(*output.split('\n')[9:-1], sep='\n')
+    time.sleep(1)
+    print("\n" + "====" * 12)
 
     # Change power - step by step
     for power in range(config.MAX_POWER, config.MIN_POWER, config.STEP_POWER):
