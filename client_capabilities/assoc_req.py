@@ -24,7 +24,8 @@ def assoc_req_parse(frame):
             supported_channels.extend([first_channel+num_of_channels*i for i in range(0, num_of_channels)]) 
 
         print(f"Client {client_mac} sent Assoc Req to BSSID {bssid}")
-        print(supported_channels)
+        print("Supported channels")
+        print(*supported_channels, sep = ", ")
 
 def main():
     print("####Catching Association Request####")
