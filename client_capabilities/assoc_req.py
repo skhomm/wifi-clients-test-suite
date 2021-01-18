@@ -9,31 +9,24 @@ SSID = "lab-iap"
 
 def assoc_req_parse(frame):
     if frame.haslayer(Dot11AssoReq) and frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8") == SSID:
-        client = frame.addr2
+        client_mac = frame.addr2
         bssid = frame.addr3
+        # Convert info field of the IE (b'' string) to hex
         channels_raw = frame.getlayer(Dot11Elt, ID=36).info.hex()
-        channels = {}
+        supported_channels = []
+        # IEEE802.11 defines the following format for supported channels:
+        # 1 byte (2 hex digits) for 'first channel number'
+        # 1 byte (2 hex digits) for 'number of channels'
         for i in range(0, len(channels_raw), 4):
             tmp = channels_raw[i:i+4]
-            channel = int(tmp[:2], 16)
-            range_ = int(tmp[2:], 16)
-            channels[channel] = range_
+            first_channel = int(tmp[:2], 16)
+            num_of_channels = int(tmp[2:], 16)
+            supported_channels.extend([first_channel+num_of_channels*i for i in range(0, num_of_channels)]) 
 
-        print(f"Client {client} sent Assoc Req to BSSID {bssid}")
-        print("Channel : Range")
-        for i in channels:
-            print(f"{i} : {channels[i]}")
-
-    #return channels
-
-#sniff(iface='wlan0', lfilter = lambda x: x.haslayer(Dot11AssoReq), prn=assoc_req_parse, store=0)
-#s = AsyncSniffer(iface="wlan0", lfilter = lambda x: x.haslayer(Dot11AssoReq), prn=assoc_req_parse)
-
-#def sniff(interface, func):
-    #sniff(iface=interface, prn=func, store=0)
+        print(f"Client {client_mac} sent Assoc Req to BSSID {bssid}")
+        print(supported_channels)
 
 def main():
-    #sniff('wlan0', assoc_req_parse)
     print("####Catching Association Request####")
     sniff(iface=INTERFACE, prn=assoc_req_parse, store=0)
 
