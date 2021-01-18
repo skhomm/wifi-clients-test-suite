@@ -51,10 +51,15 @@ def run_device(device, username, password):
     except NetMikoTimeoutException:
         sys.exit("TCP connection to the device failed!")
 
+    # Print some information about current AP
     print("\nCollecting information ...\n")
 
     output = net_connect.send_command(show_cmd(config.SHOW_ARGS))
     print(*output.split('\n')[0:3], sep='\n')
+
+    # We definitely should use a better approach to parse parameters (textfsm?)
+    current_bssid = output.split('\n')[0].split()[1]
+    print(f"\nDima, here is your BSSID value:\n{current_bssid}")
 
     output = net_connect.send_command(show_assoc())
     print(*output.split('\n')[9:-1], sep='\n')
