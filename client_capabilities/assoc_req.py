@@ -1,3 +1,5 @@
+import logging
+import sys
 from scapy.all import *
 
 # Check whether a wireless adapter is in monitor mode.
@@ -5,8 +7,15 @@ from scapy.all import *
 # adapter to a monitor mode.
 
 INTERFACE = "wlan0"
-SSID = "lab-iap"
-assoc_req_file = "assoc_req.pcap"
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("debug.log"),
+        logging.StreamHandler(sys.stdout)
+    ]
+)
 
 def write_pcap(frame, pcap_file = "assoc_req.pcap"):
     wrpcap(pcap_file, frame, append=True, sync=True)
@@ -33,20 +42,19 @@ def supported_channels_parse(frame):
         return supported_channels   
 
 def assoc_req_parse(frame):
-    write_pcap(frame, assoc_req_file)
+    write_pcap(frame)
     ssid = frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8")
     client_mac = frame.addr2
     bssid = frame.addr3
     
     supported_channels = supported_channels_parse(frame)
 
-    print(f"AssocReq, Client {client_mac}, BSSID {bssid}, SSID {ssid}")
-    print("Supported channels")
-
+    message = f"AssocReq, Client {client_mac}, BSSID {bssid}, SSID {ssid}"
     if not supported_channels:
-        print("No info")
+        message1 = "Supported channels: No Info"
     else:
-        print(*supported_channels, sep = ", ")
+        message1 = f"Supported channels: {supported_channels}"
+    logging.info(message + ", " + message1)
 
 def main():
     print("####Catching Association Request####")
@@ -54,4 +62,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
