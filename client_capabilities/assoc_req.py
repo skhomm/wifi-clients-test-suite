@@ -7,6 +7,9 @@ from scapy.all import *
 INTERFACE = "wlan0"
 SSID = "lab-iap"
 
+def write_frame(frame):
+    wrpcap("assoc_req.pcap", frame, append=True, sync=True)
+
 def supported_channels_parse(frame):
     supported_channels = []
     
@@ -29,6 +32,7 @@ def supported_channels_parse(frame):
         return supported_channels   
 
 def assoc_req_parse(frame):
+    write_frame(frame)
     ssid = frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8")
     client_mac = frame.addr2
     bssid = frame.addr3
