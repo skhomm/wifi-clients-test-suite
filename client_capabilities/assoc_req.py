@@ -28,14 +28,16 @@ def assoc_req_parse(frame):
         frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8") == SSID):
         client_mac = frame.addr2
         bssid = frame.addr3
+        
+        supported_channels = supported_channels_parse(frame)
 
         print(f"Client {client_mac} sent Assoc Req to BSSID {bssid}")
         print("Supported channels")
-        print(*supported_channels_parse(frame), sep = ", ")
+        print(*supported_channels, sep = ", ")
 
 def main():
     print("####Catching Association Request####")
-    sniff(iface=INTERFACE, prn=assoc_req_parse, store=0)
+    sniff(iface=INTERFACE, filter="type mgt subtype assoc-req", prn=assoc_req_parse, store=0)
 
 if __name__ == '__main__':
     main()
