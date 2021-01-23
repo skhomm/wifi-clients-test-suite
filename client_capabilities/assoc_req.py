@@ -29,18 +29,19 @@ def supported_channels_parse(frame):
         return supported_channels   
 
 def assoc_req_parse(frame):
-        client_mac = frame.addr2
-        bssid = frame.addr3
-        
-        supported_channels = supported_channels_parse(frame)
+    ssid = frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8")
+    client_mac = frame.addr2
+    bssid = frame.addr3
+    
+    supported_channels = supported_channels_parse(frame)
 
-        print(f"Client {client_mac} sent Assoc Req to BSSID {bssid}")
-        print("Supported channels")
+    print(f"AssocReq, Client {client_mac}, BSSID {bssid}, SSID {ssid}")
+    print("Supported channels")
 
-        if not supported_channels:
-            print("No info")
-        else:
-            print(*supported_channels, sep = ", ")
+    if not supported_channels:
+        print("No info")
+    else:
+        print(*supported_channels, sep = ", ")
 
 def main():
     print("####Catching Association Request####")
