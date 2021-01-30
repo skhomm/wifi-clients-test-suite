@@ -17,7 +17,7 @@ import subprocess
 # we must be root to run this script - exit with msg if not
 if not os.geteuid() == 0:
     print("\n#####################################################################################")
-    print("You must be root to run this script (use 'sudo adapter_control.py') - exiting")
+    print("You must be root to run this script (use 'sudo python3 adapter_control.py') - exiting")
     print("#####################################################################################\n")
     sys.exit()
 
@@ -44,6 +44,21 @@ current_width = CHANNEL_WIDTH
 current_tcpdump_options = TCPDUMP_OPTIONS
 
 
+def execute_command(command):
+    if DEBUG:
+        print(command[0])
+        print("Command : " + str(command[1]))
+
+    try:
+        cmd_output = subprocess.call(command[1], shell=True)
+        if DEBUG:
+            print("Command output: " + str(cmd_output))
+
+    except Exception as ex:
+        if DEBUG:
+            print(f"Error executing command: {command[1]} (Error msg: {ex})")
+
+
 def change_mode(adapter, mode, channel, width):
     commands_list_managed = [
         ['Killing old tcpdump processes...', '/usr/bin/pkill -f tcpdump > /dev/null 2>&1'],
@@ -62,33 +77,12 @@ def change_mode(adapter, mode, channel, width):
 
     if mode == 'managed':
         for command in commands_list_managed:
-            if DEBUG:
-                print(command[0])
-                print("Command : " + str(command[1]))
-
-            try:
-                cmd_output = subprocess.call(command[1], shell=True)
-                if DEBUG:
-                    print("Command output: " + str(cmd_output))
-
-            except Exception as ex:
-                if DEBUG:
-                    print(f"Error executing command: {command[1]} (Error msg: {ex})")
+            execute_command(command)
 
     elif mode == 'monitor':
         for command in commands_list_monitor:
-            if DEBUG:
-                print(command[0])
-                print("Command : " + str(command[1]))
+            execute_command(command)
 
-            try:
-                cmd_output = subprocess.call(command[1], shell=True)
-                if DEBUG:
-                    print("Command output: " + str(cmd_output))
-
-            except Exception as ex:
-                if DEBUG:
-                    print(f"Error executing command: {command[1]} (Error msg: {ex})")
     else:
         print("Mode not selected")
 
