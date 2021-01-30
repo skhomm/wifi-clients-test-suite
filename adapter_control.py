@@ -14,13 +14,6 @@ import os
 import subprocess
 
 
-# we must be root to run this script - exit with msg if not
-if not os.geteuid() == 0:
-    print("\n#####################################################################################")
-    print("You must be root to run this script (use 'sudo python3 adapter_control.py') - exiting")
-    print("#####################################################################################\n")
-    sys.exit()
-
 CHANNELS_2GHZ = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
 CHANNELS_5GHZ = [
                 36, 40, 44, 48,
@@ -120,6 +113,14 @@ def check_iwconfig(adapter):
 
 # One day this menu will adapt to current adapter state
 def menu():
+
+    # we must be root to run this script - exit with msg if not
+    if not os.geteuid() == 0:
+        print("\n#####################################################################################")
+        print("You must be root to run this script (use 'sudo python3 adapter_control.py') - exiting")
+        print("#####################################################################################\n")
+        sys.exit()
+
     print("\n" + "===="*20)
     print("These are settings to apply, not the current state of adapter\n")
     print(f"Adapter: {current_adapter}")
