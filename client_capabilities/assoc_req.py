@@ -1,3 +1,13 @@
+"""
+This module sniffs association requests and parses them live.
+
+Filtering for association requests is achieved with BPF filter,
+thus Scapy doesn't suffer from a big number of frames.
+Frames are parsed on the fly and values for some fields are
+logged to console as well as to a file. Frames themselves are
+also written to a pcap file for further investigation.
+"""
+
 import logging
 import sys
 from scapy.all import *
@@ -17,12 +27,9 @@ logging.basicConfig(
     ]
 )
 
-def write_pcap(frame, pcap_file = "assoc_req.pcap"):
-    wrpcap(pcap_file, frame, append=True, sync=True)
 
-def supported_channels_parse(frame):
+def parse_supported_channels(frame):
     supported_channels = []
-    
     try:
         # Convert info field of the IE (b'' string) to hex
         channels_raw = frame.getlayer(Dot11Elt, ID=36).info.hex()
@@ -34,20 +41,23 @@ def supported_channels_parse(frame):
             first_channel = int(tmp[:2], 16)
             num_of_channels = int(tmp[2:], 16)
             supported_channels.extend(
-                [first_channel+num_of_channels*i for i in range(0, num_of_channels)])
+                [first_channel+num_of_channels*i
+                 for i in range(0, num_of_channels)])
 
         return supported_channels
     except AttributeError:
-        # Return an empty list of supported channels if a client doesn't advertise them
-        return supported_channels   
+        # Return an empty list of supported channels
+        # if a client doesn't advertise them
+        return supported_channels
+
 
 def assoc_req_parse(frame):
-    write_pcap(frame)
+    wrpcap("assoc_req.pcap", frame, append=True, sync=True)
     ssid = frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8")
     client_mac = frame.addr2
     bssid = frame.addr3
-    
-    supported_channels = supported_channels_parse(frame)
+
+    supported_channels = parse_supported_channels(frame)
 
     message = f"AssocReq, Client {client_mac}, BSSID {bssid}, SSID {ssid}"
     if not supported_channels:
@@ -56,9 +66,12 @@ def assoc_req_parse(frame):
         message1 = f"Supported channels: {supported_channels}"
     logging.info(message + ", " + message1)
 
+
 def main():
     print("####Catching Association Request####")
-    sniff(iface=INTERFACE, filter="type mgt subtype assoc-req", prn=assoc_req_parse, store=0)
+    sniff(iface=INTERFACE, filter="type mgt subtype assoc-req",
+          prn=assoc_req_parse, store=0)
+
 
 if __name__ == '__main__':
     main()
