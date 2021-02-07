@@ -20,6 +20,10 @@ def show_cmd(include_args):
     return(f"show ap debug driver-config | inc {include_args}")
 
 
+def show_assoc():
+    return("show ap association")
+
+
 def change_pwr_cmd(current_channel, current_power):
     return(f"a-channel {current_channel} {current_power}")
 
@@ -31,7 +35,7 @@ def run_device(device, username, password):
     netmiko_device['username'] = username
     netmiko_device['password'] = password
 
-    # Netmiko doesn't accept 'channel' in it's dictionary
+    # Netmiko doesn't accept 'channel' or 'ap_name' in it's dictionary
     channel = netmiko_device.pop('channel')
     ap_name = netmiko_device.pop('ap_name')
     host = netmiko_device['host']
@@ -47,26 +51,46 @@ def run_device(device, username, password):
     except NetMikoTimeoutException:
         sys.exit("TCP connection to the device failed!")
 
+    # Print some information about current AP
+    print("\nCollecting information ...\n")
+
+    output = net_connect.send_command(show_cmd(config.SHOW_ARGS))
+    print(*output.split('\n')[0:3], sep='\n')
+
+    # We definitely should use a better approach to parse parameters (textfsm?)
+    current_bssid = output.split('\n')[0].split()[1]
+    print(f"\nDima, here is your BSSID value:\n{current_bssid}")
+
+    output = net_connect.send_command(show_assoc())
+    print(*output.split('\n')[9:-1], sep='\n')
+    time.sleep(1)
+    print("\n" + "====" * 12)
+
     # Change power - step by step
     for power in range(config.MAX_POWER, config.MIN_POWER, config.STEP_POWER):
-        print(f"\nTX power -> {power} dBm")
+        print(f"\nTransmit EIRP -> {power} dBm")
 
         # Send command to change power
         change_power = change_pwr_cmd(str(channel), str(power))
         net_connect.send_command(change_power)
 
-        # Send command to show current values and wait a second
+        # Check if the power has changed
         output = net_connect.send_command(show_cmd(config.SHOW_ARGS))
-        print(*output.split('\n')[0:3], sep='\n')
+        real_power = output.split('\n')[2].split()[2]
+        if float(real_power) == float(power):
+            print("Done!")
+        else:
+            print("Power has not changed, check the code")
+            break
         time.sleep(1)
 
     # Give some time to roam and revert power back to the max value
-    print(f"\nReverting back to {config.MAX_POWER} dBm in...")
+    print(f"\nBack to {config.MAX_POWER} dBm in {config.COUNTDOWN} seconds:")
     for i in range(config.COUNTDOWN, 0, -1):
-        print(i)
+        print(i, sep=' ', end=' ', flush=True)
         time.sleep(1)
     print("Now!")
-    print(f"\nTX power -> {config.MAX_POWER} dBm")
+    print(f"\nTransmit EIRP -> {config.MAX_POWER} dBm")
 
     # Send command to change power
     change_power = change_pwr_cmd(str(channel), str(config.MAX_POWER))
