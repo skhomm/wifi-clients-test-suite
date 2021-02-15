@@ -10,14 +10,13 @@ also written to a pcap file for further investigation.
 
 import logging
 import sys
+# It's bad to do wildcard imports. There should be a better way.
 from scapy.all import *
 
-# Check whether a wireless adapter is in monitor mode.
-# Can be done using a function from module that sets
-# adapter to a monitor mode.
-
+# Use adapter_control module to set interface.
 INTERFACE = "wlan0"
 
+# Logging should be implemented better (system wide logging module)
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -69,7 +68,7 @@ def assoc_req_parse(frame):
 
 def main():
     print("####Catching Association Request####")
-    sniff(iface=INTERFACE, filter="type mgt subtype assoc-req",
+    sniff(iface=INTERFACE, monitor=True, filter="type mgt subtype assoc-req",
           prn=assoc_req_parse, store=0)
 
 
