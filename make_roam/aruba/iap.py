@@ -13,6 +13,8 @@ from netmiko import ConnectHandler
 from netmiko.ssh_exception import NetMikoTimeoutException
 from paramiko.ssh_exception import AuthenticationException
 
+from scapy.all import *
+
 from make_roam.aruba import config
 
 
@@ -66,6 +68,8 @@ def run_device(device, username, password):
     time.sleep(1)
     print("\n" + "====" * 12)
 
+    t = AsyncSniffer(iface="wlan0", monitor=True, filter="type mgt subtype reassoc-req", prn=lambda x: x.summary(), store=False)
+    t.start()
     # Change power - step by step
     for power in range(config.MAX_POWER, config.MIN_POWER, config.STEP_POWER):
         print(f"\nTransmit EIRP -> {power} dBm")
@@ -95,6 +99,8 @@ def run_device(device, username, password):
     # Send command to change power
     change_power = change_pwr_cmd(str(channel), str(config.MAX_POWER))
     net_connect.send_command(change_power)
+
+    t.stop()
 
     # Send command to show current values
     output = net_connect.send_command(show_cmd(config.SHOW_ARGS))
