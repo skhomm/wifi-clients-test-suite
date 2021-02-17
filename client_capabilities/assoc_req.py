@@ -40,7 +40,7 @@ def parse_supported_channels(frame):
             first_channel = int(tmp[:2], 16)
             num_of_channels = int(tmp[2:], 16)
             supported_channels.extend(
-                [first_channel+num_of_channels*i
+                [first_channel+i*4
                  for i in range(0, num_of_channels)])
 
         return supported_channels
