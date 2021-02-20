@@ -1,4 +1,5 @@
-import sys
+from glob import glob
+
 # It's bad to do wildcard imports. There should be a better way.
 from scapy.all import *
 
@@ -33,5 +34,12 @@ def assoc_req_parse(frame):
         supported_channels = parse_supported_channels(frame)
         print(f"{supported_channels}")
 
-sniff(offline="assoc_req.pcap",
-          prn=assoc_req_parse, store=0)
+pcap_list = glob("*.pcap")
+
+for pcap in pcap_list:
+    # print("="*60)
+    print(pcap)
+    sniff(offline=pcap,
+            prn=assoc_req_parse, store=0)
+    # print("="*60)
+    print()
