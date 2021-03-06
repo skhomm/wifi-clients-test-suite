@@ -164,23 +164,28 @@ def menu():
 
 
 def option_0():
+    os.system('clear')
     start_tcpdump(current_adapter, current_tcpdump_options)
 
 
 def option_1():
+    os.system('clear')
     change_mode(current_adapter, 'managed', current_channel, current_width)
 
 
 def option_2():
+    os.system('clear')
     change_mode(current_adapter, 'monitor', current_channel, current_width)
 
 
 def option_3():
+    os.system('clear')
     get_channel_number()
     get_channel_width()
 
 
 def option_9():
+    os.system('clear')
     check_iwconfig(current_adapter)
 
 
