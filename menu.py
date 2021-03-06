@@ -82,6 +82,7 @@ def option_3():
         iap.main()
     elif vendor_chosen == "2":
         print("\nCurrently not supported...\n")
+        time.sleep(1)
     elif vendor_chosen == "  ":
         return
     else:

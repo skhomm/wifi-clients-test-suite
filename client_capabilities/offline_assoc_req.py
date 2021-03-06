@@ -1,3 +1,11 @@
+"""
+This module looks through *.pcap files in order to find association requests.
+
+After finding the association request the module parses
+advertised supported channels.
+"""
+
+import os
 from glob import glob
 
 # It's bad to do wildcard imports. There should be a better way.
@@ -38,16 +46,17 @@ def assoc_req_parse(frame):
 
 
 def main():
-    print("####Analyzing *.pcap files####")
+    os.system('clear')
+    print("####Analyzing *.pcap files####\n")
     pcap_list = glob("*.pcap")
+    if not pcap_list:
+        input("No pcaps found - Press Enter to return to the main menu\n")
 
     for pcap in pcap_list:
-        # print("="*60)
         print(pcap)
-        sniff(offline=pcap,
-                prn=assoc_req_parse, store=0)
-        # print("="*60)
+        sniff(offline=pcap, prn=assoc_req_parse, store=0)
         print()
+        input("\nPress Enter to return to the main menu\n")
 
 
 if __name__ == '__main__':
