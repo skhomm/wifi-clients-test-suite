@@ -11,7 +11,6 @@ import time
 import adapter_control
 from make_roam.aruba import iap
 from client_capabilities import assoc_req
-from client_capabilities import offline_assoc_req
 
 
 def menu():
@@ -20,9 +19,8 @@ def menu():
     print("====MAIN MENU====\n")
     print("Select task\n")
     print("[0] Start adapter control module")
-    print("[1] Start packet capture")
-    print("[2] Association Request analysis")
-    print("[3] Start roaming test")
+    print("[1] Association Request analysis")
+    print("[2] Start roaming test")
 
     task_chosen = input("\nType number and press Enter\n")
 
@@ -32,10 +30,10 @@ def menu():
         option_1()
     elif task_chosen == "2":
         option_2()
-    elif task_chosen == "3":
-        option_3()
     elif task_chosen == " ":
         os.system('clear')
+    elif task_chosen == "  ":
+        return
     else:
         print("\nInput not recognized\n")
         time.sleep(1)
@@ -49,30 +47,12 @@ def option_0():
 
 
 def option_1():
-    print("\nCurrently not supported...\n")
-    time.sleep(1)
+    assoc_req.menu()
 
 
 def option_2():
     os.system('clear')
-    print("\nSelect mode")
-    print("[1] Online")
-    print("[2] Offline")
-
-    mode_chosen = input("\nType number and press Enter\n")
-
-    if mode_chosen == "1":
-        assoc_req.online_analysis()
-    elif mode_chosen == "2":
-        assoc_req.offline_analysis()
-    elif mode_chosen == "  ":
-        return
-    else:
-        print("\nInput not recognized")
-        time.sleep(1)
-
-def option_3():
-    os.system('clear')
+    print("====ROAMING TEST MODULE====")
     print("\nSelect vendor")
     print("[1] Aruba")
     print("[2] Cisco")

@@ -114,13 +114,13 @@ def check_iwconfig(adapter):
 
 # One day this menu will adapt to current adapter state
 def menu():
-
     # we must be root to run this script - exit with msg if not
     if not os.geteuid() == 0:
-        print("\n#####################################################################################")
-        print("You must be root to run this script (use 'sudo python3 adapter_control.py') - exiting")
-        print("#####################################################################################\n")
-        sys.exit()
+        print("\n#############################################")
+        print("You must be root to run this module - exiting")
+        print("#############################################\n")
+        time.sleep(1)
+        return
 
     print("====ADAPTER CONTROL MODULE====\n")
     print("===="*20)

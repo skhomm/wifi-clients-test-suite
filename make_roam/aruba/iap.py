@@ -67,7 +67,7 @@ def run_device(device, username, password):
     print("\n" + "====" * 12)
 
     # Change power - step by step
-    for power in range(config.MAX_POWER, config.MIN_POWER, config.STEP_POWER):
+    for power in range(config.MAX_POWER, config.MIN_POWER - 1, config.STEP_POWER):
         print(f"\nTransmit EIRP -> {power} dBm")
 
         # Send command to change power

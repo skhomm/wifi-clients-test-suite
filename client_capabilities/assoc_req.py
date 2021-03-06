@@ -6,6 +6,8 @@ thus Scapy doesn't suffer from a big number of frames.
 Frames are parsed on the fly and values for some fields are
 logged to console as well as to a file. Frames themselves are
 also written to a pcap file for further investigation.
+
+It's also possible to parse previously captured pcaps.
 """
 
 import logging
@@ -95,8 +97,9 @@ def online_analysis():
           prn=assoc_req_parse(online=True), store=0)
 
 
-def main():
+def menu():
     os.system('clear')
+    print("====ASSOCIATION REQUEST ANALYSIS MODULE====\n")
     print("Select mode")
     print("[1] Online")
     print("[2] Offline")
@@ -107,7 +110,7 @@ def main():
         online_analysis()
     elif mode_chosen == "2":
         offline_analysis()
-        main()
+        menu()
     elif mode_chosen == "  ":
         return
     else:
@@ -116,4 +119,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    menu()
