@@ -6,12 +6,16 @@ and possibly helps to configure parameters by going through menus.
 """
 
 import os
+import time
 
 import adapter_control
 from make_roam.aruba import iap
 
 
 def menu():
+    os.system('clear')
+
+    print("====MAIN MENU====\n")
     print("Select task\n")
     print("[0] Start adapter control module")
     print("[1] Start packet capture")
@@ -32,20 +36,24 @@ def menu():
         os.system('clear')
     else:
         print("\nInput not recognized\n")
+        time.sleep(1)
 
     menu()
 
 
 def option_0():
+    os.system('clear')
     adapter_control.menu()
 
 
 def option_1():
     print("\nCurrently not supported...\n")
+    time.sleep(1)
 
 
 def option_2():
     print("\nCurrently not supported...\n")
+    time.sleep(1)
 
 
 def option_3():
@@ -65,4 +73,3 @@ def option_3():
 
 
 menu()
-
