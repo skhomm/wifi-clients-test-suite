@@ -11,6 +11,7 @@ import time
 import adapter_control
 from make_roam.aruba import iap
 from client_capabilities import assoc_req
+from client_capabilities import offline_assoc_req
 
 
 def menu():
@@ -60,10 +61,9 @@ def option_2():
     mode_chosen = input("\nType number and press Enter\n")
 
     if mode_chosen == "1":
-        print("\nStarting capture...\n")
         assoc_req.main()
     elif mode_chosen == "2":
-        print("\nCurrently not supported...\n")
+        offline_assoc_req.main()
     elif mode_chosen == "  ":
         return
     else:
