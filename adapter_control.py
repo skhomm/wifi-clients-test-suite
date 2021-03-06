@@ -108,9 +108,9 @@ def start_tcpdump(adapter, options):
 
 
 def check_iwconfig(adapter):
-    print("\n" + "===="*20)
+    os.system('clear')
     subprocess.call(f'iwconfig {adapter}', shell=True)
-    print("===="*20)
+
 
 # One day this menu will adapt to current adapter state
 def menu():
