@@ -10,6 +10,8 @@ also written to a pcap file for further investigation.
 
 import logging
 import sys
+import os
+import time
 # It's bad to do wildcard imports. There should be a better way.
 from scapy.all import *
 
@@ -50,26 +52,67 @@ def parse_supported_channels(frame):
         return supported_channels
 
 
-def assoc_req_parse(frame):
-    wrpcap("assoc_req.pcap", frame, append=True, sync=True)
-    ssid = frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8")
-    client_mac = frame.addr2
-    bssid = frame.addr3
+def assoc_req_parse(online):
+    # Nested function makes possible to add more arguments to the prn function
+    def nested(frame):
+        if online:
+            wrpcap("assoc_req.pcap", frame, append=True, sync=True)
 
-    supported_channels = parse_supported_channels(frame)
+        ssid = frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8")
+        client_mac = frame.addr2
+        bssid = frame.addr3
 
-    message = f"AssocReq, Client {client_mac}, BSSID {bssid}, SSID {ssid}"
-    if not supported_channels:
-        message1 = "Supported channels: No Info"
+        supported_channels = parse_supported_channels(frame)
+
+        message = f"AssocReq, Client {client_mac}, BSSID {bssid}, SSID {ssid}"
+        if not supported_channels:
+            message1 = "Supported channels: No Info"
+        else:
+            message1 = f"Supported channels: {supported_channels}"
+        logging.info(message + ", " + message1)
+
+    return nested
+
+
+def offline_analysis():
+    os.system('clear')
+    print("#### Analyzing *.pcap files in current folder ####\n")
+    pcap_list = glob("*.pcap")
+    if not pcap_list:
+        input("No pcaps found - Press Enter to return to the main menu\n")
     else:
-        message1 = f"Supported channels: {supported_channels}"
-    logging.info(message + ", " + message1)
+        for pcap in pcap_list:
+            print(f"Filename: {pcap}")
+            sniff(offline=pcap, prn=assoc_req_parse(online=False), store=0)
+            print()
+        input("Press Enter to return to the main menu\n")
+
+
+def online_analysis():
+    os.system('clear')
+    print("#### Catching Association Request ####")
+    sniff(iface=INTERFACE, monitor=True, filter="type mgt subtype assoc-req",
+          prn=assoc_req_parse(online=True), store=0)
 
 
 def main():
-    print("####Catching Association Request####")
-    sniff(iface=INTERFACE, monitor=True, filter="type mgt subtype assoc-req",
-          prn=assoc_req_parse, store=0)
+    os.system('clear')
+    print("Select mode")
+    print("[1] Online")
+    print("[2] Offline")
+
+    mode_chosen = input("\nType number and press Enter\n")
+
+    if mode_chosen == "1":
+        online_analysis()
+    elif mode_chosen == "2":
+        offline_analysis()
+        main()
+    elif mode_chosen == "  ":
+        return
+    else:
+        print("\nInput not recognized")
+        time.sleep(1)
 
 
 if __name__ == '__main__':

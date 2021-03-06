@@ -54,6 +54,7 @@ def option_1():
 
 
 def option_2():
+    os.system('clear')
     print("\nSelect mode")
     print("[1] Online")
     print("[2] Offline")
@@ -61,9 +62,9 @@ def option_2():
     mode_chosen = input("\nType number and press Enter\n")
 
     if mode_chosen == "1":
-        assoc_req.main()
+        assoc_req.online_analysis()
     elif mode_chosen == "2":
-        offline_assoc_req.main()
+        assoc_req.offline_analysis()
     elif mode_chosen == "  ":
         return
     else:
@@ -71,6 +72,7 @@ def option_2():
         time.sleep(1)
 
 def option_3():
+    os.system('clear')
     print("\nSelect vendor")
     print("[1] Aruba")
     print("[2] Cisco")
