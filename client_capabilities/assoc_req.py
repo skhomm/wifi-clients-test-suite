@@ -54,7 +54,7 @@ def parse_supported_channels(frame):
         return supported_channels
 
 
-def assoc_req_parse(is_online):
+def assoc_req_parse(frame, is_online=None):
     """
     Parse each frame and represent findings in human-friendly form.
 
@@ -65,26 +65,24 @@ def assoc_req_parse(is_online):
     We need this function to work differently for offline and online sniff.
     That's why we give it additional argument <is_online>.
 
-    Using nested function makes possible to add more arguments to the <prn>.
+    Further sniff() is called with
+    prn=lambda x: assoc_req_parse(x, is_online=True) for online sniffing.
     """
-    def nested(frame):
-        if is_online:
-            wrpcap("assoc_req.pcap", frame, append=True, sync=True)
+    if is_online:
+        wrpcap("assoc_req.pcap", frame, append=True, sync=True)
 
-        ssid = frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8")
-        client_mac = frame.addr2
-        bssid = frame.addr3
+    ssid = frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8")
+    client_mac = frame.addr2
+    bssid = frame.addr3
 
-        supported_channels = parse_supported_channels(frame)
+    supported_channels = parse_supported_channels(frame)
 
-        message = f"AssocReq, Client {client_mac}, BSSID {bssid}, SSID {ssid}"
-        if not supported_channels:
-            message1 = "Supported channels: No Info"
-        else:
-            message1 = f"Supported channels: {supported_channels}"
-        logging.info(message + ", " + message1)
-
-    return nested
+    message = f"AssocReq, Client {client_mac}, BSSID {bssid}, SSID {ssid}"
+    if not supported_channels:
+        message1 = "Supported channels: No Info"
+    else:
+        message1 = f"Supported channels: {supported_channels}"
+    logging.info(message + ", " + message1)
 
 
 def offline_analysis():
@@ -96,7 +94,7 @@ def offline_analysis():
     else:
         for pcap in pcap_list:
             print(f"Filename: {pcap}")
-            sniff(offline=pcap, prn=assoc_req_parse(is_online=False), store=0)
+            sniff(offline=pcap, prn=assoc_req_parse, store=0)
             print()
         input("Press Enter to return to the main menu\n")
 
@@ -105,7 +103,7 @@ def online_analysis():
     os.system('clear')
     print("#### Catching Association Request ####")
     sniff(iface=INTERFACE, monitor=True, filter="type mgt subtype assoc-req",
-          prn=assoc_req_parse(is_online=True), store=0)
+          prn=lambda x: assoc_req_parse(x, is_online=True), store=0)
 
 
 def menu():
