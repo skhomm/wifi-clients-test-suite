@@ -6,17 +6,21 @@ and possibly helps to configure parameters by going through menus.
 """
 
 import os
+import time
 
 import adapter_control
 from make_roam.aruba import iap
+from client_capabilities import assoc_req
 
 
 def menu():
+    os.system('clear')
+
+    print("====MAIN MENU====\n")
     print("Select task\n")
     print("[0] Start adapter control module")
-    print("[1] Start packet capture")
-    print("[2] Association Request analysis")
-    print("[3] Start roaming test")
+    print("[1] Association Request analysis")
+    print("[2] Start roaming test")
 
     task_chosen = input("\nType number and press Enter\n")
 
@@ -26,29 +30,29 @@ def menu():
         option_1()
     elif task_chosen == "2":
         option_2()
-    elif task_chosen == "3":
-        option_3()
     elif task_chosen == " ":
         os.system('clear')
+    elif task_chosen == "  ":
+        return
     else:
         print("\nInput not recognized\n")
+        time.sleep(1)
 
     menu()
 
 
 def option_0():
+    os.system('clear')
     adapter_control.menu()
 
 
 def option_1():
-    print("\nCurrently not supported...\n")
+    assoc_req.menu()
 
 
 def option_2():
-    print("\nCurrently not supported...\n")
-
-
-def option_3():
+    os.system('clear')
+    print("====ROAMING TEST MODULE====")
     print("\nSelect vendor")
     print("[1] Aruba")
     print("[2] Cisco")
@@ -60,9 +64,12 @@ def option_3():
         iap.main()
     elif vendor_chosen == "2":
         print("\nCurrently not supported...\n")
+        time.sleep(1)
+    elif vendor_chosen == "  ":
+        return
     else:
         print("\nInput not recognized")
+        time.sleep(1)
 
 
 menu()
-

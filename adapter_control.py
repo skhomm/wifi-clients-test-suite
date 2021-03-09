@@ -12,6 +12,7 @@ It does not parse current wireless adapter state yet (mode and freq).
 import sys
 import os
 import subprocess
+import time
 
 
 CHANNELS_2GHZ = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
@@ -107,21 +108,22 @@ def start_tcpdump(adapter, options):
 
 
 def check_iwconfig(adapter):
-    print("\n" + "===="*20)
+    os.system('clear')
     subprocess.call(f'iwconfig {adapter}', shell=True)
-    print("===="*20)
+
 
 # One day this menu will adapt to current adapter state
 def menu():
-
     # we must be root to run this script - exit with msg if not
     if not os.geteuid() == 0:
-        print("\n#####################################################################################")
-        print("You must be root to run this script (use 'sudo python3 adapter_control.py') - exiting")
-        print("#####################################################################################\n")
-        sys.exit()
+        print("\n#############################################")
+        print("You must be root to run this module - exiting")
+        print("#############################################\n")
+        time.sleep(1)
+        return
 
-    print("\n" + "===="*20)
+    print("====ADAPTER CONTROL MODULE====\n")
+    print("===="*20)
     print("These are settings to apply, not the current state of adapter\n")
     print(f"Adapter: {current_adapter}")
     print(f"Channel number: {current_channel}")
@@ -151,27 +153,39 @@ def menu():
         option_9()
     elif task_chosen == " ":
         os.system('clear')
+    elif task_chosen == "  ":
+        return
+    else:
+        print("\nInput not recognized")
+        time.sleep(1)
+        os.system('clear')
+
     menu()
 
 
 def option_0():
+    os.system('clear')
     start_tcpdump(current_adapter, current_tcpdump_options)
 
 
 def option_1():
+    os.system('clear')
     change_mode(current_adapter, 'managed', current_channel, current_width)
 
 
 def option_2():
+    os.system('clear')
     change_mode(current_adapter, 'monitor', current_channel, current_width)
 
 
 def option_3():
+    os.system('clear')
     get_channel_number()
     get_channel_width()
 
 
 def option_9():
+    os.system('clear')
     check_iwconfig(current_adapter)
 
 
