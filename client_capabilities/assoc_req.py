@@ -54,10 +54,21 @@ def parse_supported_channels(frame):
         return supported_channels
 
 
-def assoc_req_parse(online):
-    # Nested function makes possible to add more arguments to the prn function
+def assoc_req_parse(is_online):
+    """
+    Parse each frame and represent findings in human-friendly form.
+
+    This function is called by sniff's <prn=assoc_req_parse> argument.
+    In general this function can have only one parameter (frame).
+    Scapy's sniff() is designed this way.
+
+    We need this function to work differently for offline and online sniff.
+    That's why we give it additional argument <is_online>.
+
+    Using nested function makes possible to add more arguments to the <prn>.
+    """
     def nested(frame):
-        if online:
+        if is_online:
             wrpcap("assoc_req.pcap", frame, append=True, sync=True)
 
         ssid = frame.getlayer(Dot11Elt, ID=0).info.decode("utf-8")
@@ -85,7 +96,7 @@ def offline_analysis():
     else:
         for pcap in pcap_list:
             print(f"Filename: {pcap}")
-            sniff(offline=pcap, prn=assoc_req_parse(online=False), store=0)
+            sniff(offline=pcap, prn=assoc_req_parse(is_online=False), store=0)
             print()
         input("Press Enter to return to the main menu\n")
 
@@ -94,7 +105,7 @@ def online_analysis():
     os.system('clear')
     print("#### Catching Association Request ####")
     sniff(iface=INTERFACE, monitor=True, filter="type mgt subtype assoc-req",
-          prn=assoc_req_parse(online=True), store=0)
+          prn=assoc_req_parse(is_online=True), store=0)
 
 
 def menu():
